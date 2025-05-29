@@ -364,7 +364,6 @@ const scrapeNews = async (maxArticles = 5) => {
     return processedArticles;
   } catch (error) {
     console.error("Scraping failed:", error.message);
-    throw error;
   }
 };
 

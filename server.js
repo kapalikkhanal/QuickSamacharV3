@@ -192,34 +192,34 @@ async function postVideos() {
         try {
           await PostToTiktok(videoPath, content, hashtags);
           console.log("Successfully posted to TikTok");
+          await updateVideoStatus(article.uuid);
+
+          // 4. Cleanup generated files
+          try {
+            const articleId = article.uuid;
+            const pathsToClean = [
+              path.join(process.cwd(), "public", "generated_images", articleId),
+              path.join(process.cwd(), "public", "generated_audio", articleId),
+              path.join(process.cwd(), "public", "generated_video", articleId),
+            ];
+
+            console.log("Cleaning up generated files...");
+            await Promise.all(
+              pathsToClean.map(async (path) => {
+                if (fs.existsSync(path)) {
+                  await rimraf(path);
+                  console.log(`Deleted: ${path}`);
+                }
+              })
+            );
+          } catch (cleanupError) {
+            console.error("Cleanup failed:", cleanupError);
+          }
         } catch (socialError) {
           console.error("Failed to post to social media:", socialError);
         }
 
-        await updateVideoStatus(article.uuid);
         console.log("Firestore updated with video status");
-
-        // 4. Cleanup generated files
-        try {
-          const articleId = article.uuid;
-          const pathsToClean = [
-            path.join(process.cwd(), "public", "generated_images", articleId),
-            path.join(process.cwd(), "public", "generated_audio", articleId),
-            path.join(process.cwd(), "public", "generated_video", articleId),
-          ];
-
-          console.log("Cleaning up generated files...");
-          await Promise.all(
-            pathsToClean.map(async (path) => {
-              if (fs.existsSync(path)) {
-                await rimraf(path);
-                console.log(`Deleted: ${path}`);
-              }
-            })
-          );
-        } catch (cleanupError) {
-          console.error("Cleanup failed:", cleanupError);
-        }
       } catch (error) {
         console.error(`Failed to process article ${article.uuid}:`, error);
       }
