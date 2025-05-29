@@ -1,0 +1,41 @@
+{
+  "name": "quick-samachar_v2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.0",
+    "@remotion/bundler": "^4.0.280",
+    "@remotion/media-utils": "^4.0.280",
+    "@remotion/renderer": "^4.0.280",
+    "axios": "^1.8.4",
+    "axios-rate-limit": "^1.4.0",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "firebase-admin": "^13.2.0",
+    "fluent-ffmpeg": "^2.1.3",
+    "get-audio-duration": "^4.0.1",
+    "node-cache": "^5.1.2",
+    "node-cron": "^3.0.3",
+    "puppeteer": "^24.4.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "puppeteer-real-browser": "^1.4.2",
+    "react-helmet": "^6.1.0",
+    "remotion": "^4.0.280",
+    "rimraf": "^6.0.1",
+    "util": "^0.12.5",
+    "uuid": "^11.1.0",
+    "wav": "^1.0.2",
+    "winston": "^3.17.0"
+  }
+}
