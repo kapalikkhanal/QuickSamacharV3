@@ -341,21 +341,21 @@ async function PostToTiktok(videoPath, content, hashtags) {
     // await page.keyboard.up('Control');
     // await page.keyboard.press('Backspace');
 
-    await page.keyboard.down('Meta');
-    await page.keyboard.press('KeyA');
-    await new Promise(resolve => setTimeout(resolve, 300));
-    await page.keyboard.up('Meta');
-    await page.keyboard.press('Delete');
+    // await page.keyboard.down('Meta');
+    // await page.keyboard.press('KeyA');
+    // await new Promise(resolve => setTimeout(resolve, 300));
+    // await page.keyboard.up('Meta');
+    // await page.keyboard.press('Delete');
 
     await new Promise((resolve) => setTimeout(resolve, 500));
 
-    await page.evaluate(
-      (text) => navigator.clipboard.writeText(text),
-      `${content}\n\n`
-    );
-    await page.keyboard.down("Control");
-    await page.keyboard.press("V");
-    await page.keyboard.up("Control");
+    // await page.evaluate(
+    //   (text) => navigator.clipboard.writeText(text),
+    //   `${content}\n\n`
+    // );
+    // await page.keyboard.down("Control");
+    // await page.keyboard.press("V");
+    // await page.keyboard.up("Control");
 
     for (const hashtag of hashtags) {
       for (const char of hashtag) {
