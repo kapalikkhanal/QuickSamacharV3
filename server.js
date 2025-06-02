@@ -82,7 +82,7 @@ async function generateVideos(maxVideos = 3) {
 
         // 4. Generate video filename
         const timestamp = new Date().toISOString();
-        const videoFilename = `video_${timestamp}.mp4`;
+        const videoFilename = `${timestamp}.mp4`;
         const videoPath = path.join(articleVideoDir, videoFilename);
         const webVideoPath = `/generated_video/${article.uuid}/${videoFilename}`;
 
@@ -105,26 +105,6 @@ async function generateVideos(maxVideos = 3) {
 
         console.log(`Video successfully rendered: ${videoPath}`);
 
-        // 6. Post to social media (example for TikTok)
-        try {
-          const hashtags = Array.isArray(article.hashtags)
-            ? article.hashtags
-            : ["#nepal", "#news", "#nepalinews"];
-
-          await PostToTiktok(
-            videoPath,
-            article.paraphrased_content.substring(0, 150) + "...",
-            hashtags
-          );
-          console.log("Successfully posted to TikTok");
-        } catch (socialError) {
-          console.error("Failed to post to social media:", socialError);
-        }
-
-        // 7. Update Firestore with video information
-        await updateVideoStatus(article.uuid, webVideoPath);
-        console.log("Firestore updated with video information");
-
         results.push({
           success: true,
           articleId: article.uuid,
@@ -132,13 +112,6 @@ async function generateVideos(maxVideos = 3) {
           socialPosted: true,
         });
 
-        // 8. Optional: Restart PM2 to free memory
-        // try {
-        //   execSync('pm2 reload quick_samachar_v2');
-        //   console.log("PM2 process reloaded to free memory");
-        // } catch (pm2Error) {
-        //   console.warn("PM2 reload failed:", pm2Error.message);
-        // }
       } catch (error) {
         console.error(`Failed to process article ${article.uuid}:`, error);
         results.push({
